@@ -1,24 +1,13 @@
-# README
+# Bonya's Travel Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Travel Blog
+Using Ruby on Rails
+.. in progress ..
 
-Things you may want to cover:
 
-* Ruby version
+### Summary
 
-* System dependencies
+Bonya is coming from my name + my wife's name or Boris + Tanya = Bonya.
+We are going to share most of our travel's experiences, tips and hobbies. I hope you can find it useful and interesting. We would like to hear your comments on. 
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

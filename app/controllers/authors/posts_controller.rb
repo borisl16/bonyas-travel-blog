@@ -5,25 +5,25 @@ module Authors
     
     # GET /posts
     def index
-      @posts = Post.all
+      @posts = current_author.posts 
     end
 
     # GET /posts/1
-    def show
+    def show 
     end
 
     # GET /posts/new
     def new
-      @post = Post.new
+      @post = current_author.posts.build
     end
-
+ 
     # GET /posts/1/edit
     def edit
     end
 
     # POST /posts
     def create
-      @post = Post.new(post_params)
+      @post = current_author.posts.build(post_params)
 
       if @post.save
         redirect_to @post, notice: 'Post was successfully created.'
@@ -50,12 +50,12 @@ module Authors
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_post
-        @post = Post.find_by_id(params[:id])
+        @post = current_author.posts.find_by_id(params[:id])
       end
 
       # Only allow a list of trusted parameters through.
       def post_params
-        params.require(:post).permit(:title, :description, :published, :published_at, :author_id)
+        params.require(:post).permit(:title, :description, :published_at, :author_id)
         
       end
   end

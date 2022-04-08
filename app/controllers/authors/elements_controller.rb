@@ -24,7 +24,7 @@ module Authors
 
     # POST /elements
     def create
-      @element = @post.elements.build
+      @element = @post.elements.build(element_params)
 
       if @element.save
         notice = nil

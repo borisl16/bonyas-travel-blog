@@ -1,29 +1,43 @@
 
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-4">
     <%= link_to 'Back', posts_path, class: 'btn btn-secondary  mb-3' %>
         <div class="card">
-            <div class="card-body">
+            <div class="card-body pt-3">
                 <h4 class="card-title">Editing Post</h4>
                 <%= render 'form', post: @post %>
             </div>  
         </div>    
     </div>
-    <div class="col-md-6">
+    
+    <div class="col-md-7">
+        <div class="md-3">
         <%= form_with(model: [@post, @paragraph]) do |form| %>
             <%= form.hidden_field :element_type, value: 'paragraph' %>
-            <%= form.submit 'Paragraph', class: 'btn btn-primary'%>
+            <%= form.submit 'Paragraph', class: 'btn btn-primary mb-3'%>
         <% end %>
-        <% @post.elements.each do |element| %>
-            <% if element.persisted? %>
-                <%= form_with(model: [@post, element]) do |form| %>                
-                    <%= form.text_area :content %>
-                    <%= form.submit 'Save', class: 'btn btn-primary'%>
-                <% end %>
-            <% end %>
-        <% end %>
-    </div>
+        </div>
+        <div class="card">
+            <div class="card-body pt-3">
+                <% @post.elements.each do |element| %>
+                    <% if element.persisted? %>
+                        <div class="md-3">
+                            <div class="paragraph-content ">
+                                <%= element.content%>
+                            </div>
+                            <div class="paragraph-form">
+                                <%= form_with(model: [@post, element]) do |form| %>                
+                                    <%= form.rich_text_area :content, class: 'mb-3 pt-2'%>
+                                    <%= form.submit 'Save', class: 'btn btn-primary mb-3'%>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                <% end %>        
+            </div>
+        </div>
+    </div>        
 </div>
 
 

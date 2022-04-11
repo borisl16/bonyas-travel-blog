@@ -1,0 +1,10 @@
+.authors{
+
+    .paragraph {
+        transition: background-color 0.5 ease;
+        &:hover {
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
+    }
+}

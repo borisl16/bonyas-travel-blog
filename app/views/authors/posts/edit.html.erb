@@ -22,15 +22,20 @@
             <div class="card-body pt-3">
                 <% @post.elements.each do |element| %>
                     <% if element.persisted? %>
-                        <div class="md-3">
-                            <div class="paragraph-content ">
-                                <%= element.content%>
+                        <div class="md-4 p-3 paragraph">
+                            <div class="paragraph-content">
+                                <% if element.content.present? %>
+                                    <%= element.content%>
+                                <% else %>
+                                    Click to add content.
+                                <% end %>
                             </div>
-                            <div class="paragraph-form">
+                            <div class="paragraph-form d-none ">
                                 <%= form_with(model: [@post, element]) do |form| %>                
                                     <%= form.rich_text_area :content, class: 'mb-3 pt-2'%>
                                     <%= form.submit 'Save', class: 'btn btn-primary mb-3'%>
-                                <% end %>
+                                    <a href="#" class="cancel btn btn-secondary mb-3">Cancel</a>
+                                <% end %> 
                             </div>
                         </div>
                     <% end %>

@@ -27,7 +27,7 @@ module Authors
       @post = current_author.posts.build(post_params)
 
       if @post.save
-        redirect_to @post, notice: 'Post was successfully created.'
+        redirect_to edit_post_path(@post)
       else
         render :new
       end
@@ -36,7 +36,7 @@ module Authors
     # PATCH/PUT /posts/1
     def update
       if @post.update(post_params)
-        redirect_to @post, notice: 'Post was successfully updated.'
+        redirect_to edit_post_path(@post)
       else
         render :edit
       end
@@ -44,8 +44,11 @@ module Authors
 
     # DELETE /posts/1
     def destroy
+      @post = Post.find(params[:id])
       @post.destroy
-      redirect_to posts_url, notice: 'Post was successfully destroyed.'
+      respond_to do |format|
+          format.html { redirect_to posts_path, notice: 'Post was deleted!'}
+      end
     end
 
     private
@@ -56,7 +59,7 @@ module Authors
 
       # Only allow a list of trusted parameters through.
       def post_params
-        params.require(:post).permit(:title, :description, :published_at, :author_id)
+        params.require(:post).permit(:title, :description, :published_at, :author_id, :header_image)
         
       end
   end

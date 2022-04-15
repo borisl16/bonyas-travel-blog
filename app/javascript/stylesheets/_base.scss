@@ -2,9 +2,17 @@
 
     .paragraph {
         transition: background-color 0.5 ease;
+        text-align: center !important;
         &:hover {
             background-color: #f8f9fa;
             cursor: pointer;
         }
+    }
+    .image {
+        text-align: center;
+        img{
+            max-width:  90%;
+            
+        }        
     }
 }

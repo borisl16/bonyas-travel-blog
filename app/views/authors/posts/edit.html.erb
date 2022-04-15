@@ -1,6 +1,4 @@
-
-
-<div class="row">
+ <div class="row">
     <div class="col-md-4">
     <%= link_to 'Back', posts_path, class: 'btn btn-secondary  mb-3' %>
         <div class="card">
@@ -12,16 +10,21 @@
     </div>
     
     <div class="col-md-7">
-        <div class="md-3">
-        <%= form_with(model: [@post, @paragraph]) do |form| %>
+        <div class="md-3 p-2">
+        <%= form_with(model: [@post, @element]) do |form| %>
             <%= form.hidden_field :element_type, value: 'paragraph' %>
-            <%= form.submit 'Paragraph', class: 'btn btn-primary mb-3'%>
+            <%= form.submit 'Paragraph', class: 'btn btn-primary mt-3'%>
         <% end %>
-        </div>
+        <%= form_with(model: [@post, @element]) do |form| %>
+            <%= form.hidden_field :element_type, value: 'image' %>
+            <%= form.submit 'Image', class: 'btn btn-primary mt-3'%>
+        <% end %>
+        </div> 
         <div class="card">
-            <div class="card-body pt-3">
+            <div class="card-body pt-3"> 
                 <% @post.elements.each do |element| %>
                     <% if element.persisted? %>
+                    <% if element.paragraph?%>
                         <div class="md-4 p-3 paragraph">
                             <div class="paragraph-content">
                                 <% if element.content.present? %>
@@ -32,13 +35,37 @@
                             </div>
                             <div class="paragraph-form d-none ">
                                 <%= form_with(model: [@post, element]) do |form| %>                
-                                    <%= form.rich_text_area :content, class: 'mb-3 pt-2'%>
-                                    <%= form.submit 'Save', class: 'btn btn-primary mb-3'%>
-                                    <a href="#" class="cancel btn btn-secondary mb-3">Cancel</a>
+                                    <%= form.rich_text_area :content %>
+                                    <div class="mt-3 d-flex justify-content-between"> 
+                                    <div>
+                                        <%= form.submit 'Save', class: 'btn btn-primary mb-3'%>
+                                        <a href="#" class="cancel btn btn-secondary mb-3">Cancel</a>
+                                    </div>  
+                                    <%= link_to "Delete", post_element_path(@post, element), method: :delete, class: "btn btn-danger mb-3", data: { confirm: "Are you sure?"} %>
+                                    </div>
                                 <% end %> 
-                            </div>
+                            </div>  
                         </div>
-                    <% end %>
+                        <% elsif element.image? %>
+                                <div class="image p-2 image">
+                                <% if element.image.present?%>
+                                <div>
+                                    <%= image_tag(element.image) %>
+                                </div>                            
+                                    <%= link_to "Delete", post_element_path(@post, element), method: :delete, class: "btn btn-danger mt-2", data: { confirm: "Are you sure?"} %> <br>
+                                <% else %>
+                                <%= form_with(model: [@post, element]) do |form| %>                
+                                        <%= form.file_field :image %>
+                                        <div class="mt-3">
+                                        <%= form.submit 'Save', class: 'btn btn-primary mb-3'%>
+                                        <a href="#" class="cancel btn btn-secondary mb-3">Cancel</a>
+                                        </div>
+                                    <% end %> 
+                            <% end %>
+                            </div>
+                            
+                        <% end %>                        
+                    <% end %> 
                 <% end %>        
             </div>
         </div>

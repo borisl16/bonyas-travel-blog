@@ -13,6 +13,7 @@ Turbolinks.start()
 ActiveStorage.start()
 
 import '../stylesheets/application';
+import 'controllers'
 
 require("trix")
 require("@rails/actiontext")
@@ -35,3 +36,4 @@ document.addEventListener('turbolinks:load', () => {
         element.previousElementSibling.classList.remove('d-none')
         })
     })
+import "controllers"

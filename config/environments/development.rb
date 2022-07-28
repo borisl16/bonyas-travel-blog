@@ -1,11 +1,11 @@
 
 
 require "active_support/core_ext/integer/time"
-  config.session_store :cache_store
+  # config.session_store :cache_store
 
 
 Rails.application.configure do
-  config.***
+  config
   
   # Settings specified here will take precedence over those in config/application.rb.
 
